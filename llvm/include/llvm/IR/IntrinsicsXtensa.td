@@ -253,10 +253,10 @@ def int_xtensa_xsr_m3: ClangBuiltin<"__builtin_xtensa_xsr_m3">,
 // Float operations
 
 def int_xtensa_xt_movt_s: ClangBuiltin<"__builtin_xtensa_xt_movt_s">,
-  Intrinsic<[llvm_float_ty], [llvm_float_ty, llvm_float_ty, llvm_i1_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_float_ty], [llvm_float_ty, llvm_float_ty, llvm_v1i1_ty], [IntrNoMem]>;
 
 def int_xtensa_xt_movf_s: ClangBuiltin<"__builtin_xtensa_xt_movf_s">,
-  Intrinsic<[llvm_float_ty], [llvm_float_ty, llvm_float_ty, llvm_i1_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_float_ty], [llvm_float_ty, llvm_float_ty, llvm_v1i1_ty], [IntrNoMem]>;
 
 def int_xtensa_xt_oeq_s: ClangBuiltin<"__builtin_xtensa_xt_oeq_s">,
   Intrinsic<[llvm_i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
