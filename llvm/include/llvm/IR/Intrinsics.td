@@ -514,6 +514,7 @@ def llvm_v512i1_ty     : LLVMType<v512i1>;   // 512 x i1
 def llvm_v1024i1_ty    : LLVMType<v1024i1>;  //1024 x i1
 def llvm_v2048i1_ty    : LLVMType<v2048i1>;  //2048 x i1
 
+def llvm_v1i1_ty       : LLVMType<v1i1>;     //  1 x i1
 def llvm_v1i8_ty       : LLVMType<v1i8>;     //  1 x i8
 def llvm_v2i8_ty       : LLVMType<v2i8>;     //  2 x i8
 def llvm_v3i8_ty       : LLVMType<v3i8>;     //  3 x i8
@@ -2782,5 +2783,6 @@ include "llvm/IR/IntrinsicsSPIRV.td"
 include "llvm/IR/IntrinsicsVE.td"
 include "llvm/IR/IntrinsicsDirectX.td"
 include "llvm/IR/IntrinsicsLoongArch.td"
+include "llvm/IR/IntrinsicsXtensa.td"
 
 #endif // TEST_INTRINSICS_SUPPRESS_DEFS
