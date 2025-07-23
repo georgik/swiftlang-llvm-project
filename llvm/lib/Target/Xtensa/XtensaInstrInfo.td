@@ -1113,8 +1113,9 @@ let Predicates = [HasBoolean] in {
   def AND_BR_PAT: BIN_PAT<and,ANDB,i1>;
 
   // vselect C T F = C * T + ~C * F
-  def : Pat<(i1 (vselect i1:$c, i1:$t, i1:$f)),
-          (ORB (ANDB $t, $f), (ANDBC $f, $c))>;
+  // Temporarily commented out due to type issues
+  // def : Pat<(i1 (vselect i1:$c, i1:$t, i1:$f)),
+  //        (ORB (ANDB $c, $t), (ANDBC $f, $c))>;
 
   
   def MOVBA_P2: Pseudo<(outs BR:$r, AR:$x, AR:$y), (ins AR:$s),
@@ -2185,6 +2186,7 @@ include "XtensaDSPInstrInfo.td"
 //===----------------------------------------------------------------------===//
 // HiFi3 Instructions
 //===----------------------------------------------------------------------===//
-include "XtensaHIFIInstrFormats.td"
-include "XtensaHIFIInstrInfo.td"
-include "XtensaHIFIInstrPatterns.td"
+// Temporarily commented out to test main instruction set
+// include "XtensaHIFIInstrFormats.td"
+// include "XtensaHIFIInstrInfo.td"
+// include "XtensaHIFIInstrPatterns.td"
