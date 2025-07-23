@@ -1462,7 +1462,7 @@ let Inst{7} = ae_cmpp_v1{3};
 def AE_EQ32 : AE_EQ32_X24<[(set BR2:$br2, (int_xtensa_ae_eq32 AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1))]>;
 
 class AE_EQ64_AE_FORMAT1<list<dag> pattern>
-    : XtensaInst64<(outs BR:$br), (ins AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1), "ae_eq64 $br, $ae_cmpp_v0, $ae_cmpp_v1", pattern>,
+    : XtensaInst64<(outs BR1:$br), (ins AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1), "ae_eq64 $br, $ae_cmpp_v0, $ae_cmpp_v1", pattern>,
     Requires<[HasHIFI3]>
 {
 //operand decl
@@ -1498,7 +1498,7 @@ let Inst{31} = ae_cmpp_v1{3};
 
 
 
-def AE_EQ64 : AE_EQ64_AE_FORMAT1<[(set BR:$br, (int_xtensa_ae_eq64 AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1))]>;
+def AE_EQ64 : AE_EQ64_AE_FORMAT1<[(set BR1:$br, (int_xtensa_ae_eq64 AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1))]>;
 
 class AE_L16_I_X24<list<dag> pattern>
     : XtensaAEInst24<(outs AE_DR:$ae_ls_v), (ins AR:$ars, imm16n_14:$ae_immls16), "ae_l16.i $ae_ls_v, $ars, $ae_immls16", pattern>,
@@ -5249,7 +5249,7 @@ let Inst{31} = ae_cmpp_v1{3};
 def AE_LE32 : AE_LE32_AE_FORMAT1<[(set BR2:$br2, (int_xtensa_ae_le32 AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1))]>;
 
 class AE_LE64_X24<list<dag> pattern>
-    : XtensaAEInst24<(outs BR:$br), (ins AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1), "ae_le64 $br, $ae_cmpp_v0, $ae_cmpp_v1", pattern>,
+    : XtensaAEInst24<(outs BR1:$br), (ins AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1), "ae_le64 $br, $ae_cmpp_v0, $ae_cmpp_v1", pattern>,
     Requires<[HasHIFI3]>
 {
 //operand decl
@@ -5283,7 +5283,7 @@ let Inst{7} = ae_cmpp_v1{3};
 
 
 
-def AE_LE64 : AE_LE64_X24<[(set BR:$br, (int_xtensa_ae_le64 AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1))]>;
+def AE_LE64 : AE_LE64_X24<[(set BR1:$br, (int_xtensa_ae_le64 AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1))]>;
 
 class AE_LT16_AE_FORMAT1<list<dag> pattern>
     : XtensaInst64<(outs BR4:$br4), (ins AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1), "ae_lt16 $br4, $ae_cmpp_v0, $ae_cmpp_v1", pattern>,
@@ -5362,7 +5362,7 @@ let Inst{7} = ae_cmpp_v1{3};
 def AE_LT32 : AE_LT32_X24<[(set BR2:$br2, (int_xtensa_ae_lt32 AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1))]>;
 
 class AE_LT64_X24<list<dag> pattern>
-    : XtensaAEInst24<(outs BR:$br), (ins AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1), "ae_lt64 $br, $ae_cmpp_v0, $ae_cmpp_v1", pattern>,
+    : XtensaAEInst24<(outs BR1:$br), (ins AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1), "ae_lt64 $br, $ae_cmpp_v0, $ae_cmpp_v1", pattern>,
     Requires<[HasHIFI3]>
 {
 //operand decl
@@ -5397,7 +5397,7 @@ let Inst{7} = ae_cmpp_v1{3};
 
 
 
-def AE_LT64 : AE_LT64_X24<[(set BR:$br, (int_xtensa_ae_lt64 AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1))]>;
+def AE_LT64 : AE_LT64_X24<[(set BR1:$br, (int_xtensa_ae_lt64 AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1))]>;
 
 class AE_MAX32_X24<list<dag> pattern>
     : XtensaAEInst24<(outs AE_DR:$ae_cmpp_v), (ins AE_DR:$ae_cmpp_v0, AE_DR:$ae_cmpp_v1), "ae_max32 $ae_cmpp_v, $ae_cmpp_v0, $ae_cmpp_v1", pattern>,
@@ -6223,7 +6223,7 @@ let Inst{7} = bt2{2};
 def AE_MOVF32X2 : AE_MOVF32X2_X24<[(set AE_DR:$ae_cmov_v_out, (int_xtensa_ae_movf32x2 AE_DR:$ae_cmov_v, AE_DR:$ae_cmov_v0, BR2:$bt2))]>;
 
 class AE_MOVF64_AE_FORMAT1<list<dag> pattern>
-    : XtensaInst64<(outs AE_DR:$ae_cmov_v_out), (ins AE_DR:$ae_cmov_v, AE_DR:$ae_cmov_v0, BR:$bt), "ae_movf64 $ae_cmov_v, $ae_cmov_v0, $bt", pattern>,
+    : XtensaInst64<(outs AE_DR:$ae_cmov_v_out), (ins AE_DR:$ae_cmov_v, AE_DR:$ae_cmov_v0, BR1:$bt), "ae_movf64 $ae_cmov_v, $ae_cmov_v0, $bt", pattern>,
     Requires<[HasHIFI3]>
 {
 //operand decl
@@ -6258,7 +6258,7 @@ let Inst{31} = bt{3};
 
 
 
-def AE_MOVF64 : AE_MOVF64_AE_FORMAT1<[(set AE_DR:$ae_cmov_v_out, (int_xtensa_ae_movf64 AE_DR:$ae_cmov_v, AE_DR:$ae_cmov_v0, BR:$bt))]>;
+def AE_MOVF64 : AE_MOVF64_AE_FORMAT1<[(set AE_DR:$ae_cmov_v_out, (int_xtensa_ae_movf64 AE_DR:$ae_cmov_v, AE_DR:$ae_cmov_v0, BR1:$bt))]>;
 
 class AE_MOVI_X24<list<dag> pattern>
     : XtensaAEInst24<(outs AE_DR:$ae_ar_to_dr_v), (ins imm16n_47:$movi_imm), "ae_movi $ae_ar_to_dr_v, $movi_imm", pattern>,
@@ -6378,7 +6378,7 @@ let Inst{7} = bt2{2};
 def AE_MOVT32X2 : AE_MOVT32X2_X24<[(set AE_DR:$ae_cmov_v_out, (int_xtensa_ae_movt32x2 AE_DR:$ae_cmov_v, AE_DR:$ae_cmov_v0, BR2:$bt2))]>;
 
 class AE_MOVT64_X24<list<dag> pattern>
-    : XtensaAEInst24<(outs AE_DR:$ae_cmov_v_out), (ins AE_DR:$ae_cmov_v, AE_DR:$ae_cmov_v0, BR:$bt), "ae_movt64 $ae_cmov_v, $ae_cmov_v0, $bt", pattern>,
+    : XtensaAEInst24<(outs AE_DR:$ae_cmov_v_out), (ins AE_DR:$ae_cmov_v, AE_DR:$ae_cmov_v0, BR1:$bt), "ae_movt64 $ae_cmov_v, $ae_cmov_v0, $bt", pattern>,
     Requires<[HasHIFI3]>
 {
 //operand decl
@@ -6412,7 +6412,7 @@ let Inst{7} = bt{3};
 
 
 
-def AE_MOVT64 : AE_MOVT64_X24<[(set AE_DR:$ae_cmov_v_out, (int_xtensa_ae_movt64 AE_DR:$ae_cmov_v, AE_DR:$ae_cmov_v0, BR:$bt))]>;
+def AE_MOVT64 : AE_MOVT64_X24<[(set AE_DR:$ae_cmov_v_out, (int_xtensa_ae_movt64 AE_DR:$ae_cmov_v, AE_DR:$ae_cmov_v0, BR1:$bt))]>;
 
 class AE_MUL16X4_AE_FORMAT2<list<dag> pattern>
     : XtensaInst64<(outs AE_DR:$ae_mul_q1, AE_DR:$ae_mul_q0), (ins AE_DR:$ae_mul_d1, AE_DR:$ae_mul_d0), "ae_mul16x4 $ae_mul_q1, $ae_mul_q0, $ae_mul_d1, $ae_mul_d0", pattern>,

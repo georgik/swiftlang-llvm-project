@@ -153,14 +153,14 @@ def : BIN_PAT<mul,AE_MUL16X4,v4i16>;
 
 /* SELECT and SETCC patterns */
 foreach VT = AE_DR.RegTypes in {
-  def : Pat<(VT (select v1i1:$cc, AE_DR:$t, AE_DR:$f)),
-            (AE_MOVT64 AE_DR:$t, AE_DR:$f, v1i1:$cc)>;
+  def : Pat<(VT (select BR1:$cc, AE_DR:$t, AE_DR:$f)),
+            (AE_MOVT64 AE_DR:$t, AE_DR:$f, BR1:$cc)>;
 }
-def : Pat<(f32 (int_xtensa_xt_movt_s FPR:$t, FPR:$f, v1i1:$cc)),
-            (MOVT_S FPR:$t, FPR:$f, v1i1:$cc)>,Requires<[HasSingleFloat]>;
+def : Pat<(f32 (int_xtensa_xt_movt_s FPR:$t, FPR:$f, BR1:$cc)),
+            (MOVT_S FPR:$t, FPR:$f, BR1:$cc)>,Requires<[HasSingleFloat]>;
 
-def : Pat<(f32 (select v1i1:$cc, FPR:$t, FPR:$f)),
-            (MOVT_S FPR:$t, FPR:$f, v1i1:$cc)>,Requires<[HasSingleFloat]>;
+def : Pat<(f32 (select BR1:$cc, FPR:$t, FPR:$f)),
+            (MOVT_S FPR:$t, FPR:$f, BR1:$cc)>,Requires<[HasSingleFloat]>;
 
 class SELECTCC_VEC_INT<CondCode cond, Instruction cmp, Instruction mov, ValueType vt> 
   :  Pat<(vt (selectcc i32:$lhs, i32:$rhs, AE_DR:$t, AE_DR:$f, cond)),

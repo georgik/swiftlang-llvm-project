@@ -1432,14 +1432,14 @@ let Constraints = "$dr = $r,@earlyclobber $dr" in {
   def MOVNEZ_S : RRR_Inst<0x00, 0x0B, 0x09, (outs FPR:$dr), (ins FPR:$r, FPR:$s, AR:$t),
                         "movnez.s\t$r, $s, $t", []>, Requires<[HasSingleFloat]>;
 
-  def MOVT_S   : RRR_Inst<0x00, 0x0B, 0x0D, (outs FPR:$dr), (ins FPR:$r, FPR:$s, BR:$t),
+  def MOVT_S   : RRR_Inst<0x00, 0x0B, 0x0D, (outs FPR:$dr), (ins FPR:$r, FPR:$s, BR1:$t),
                         "movt.s\t$r, $s, $t",
-                        [(set FPR:$dr, (int_xtensa_xt_movt_s FPR:$r, FPR:$s, BR:$t))]>,
+                        [(set FPR:$dr, (int_xtensa_xt_movt_s FPR:$r, FPR:$s, BR1:$t))]>,
                         Requires<[HasBoolean, HasSingleFloat]>;
 
-  def MOVF_S   : RRR_Inst<0x00, 0x0B, 0x0C, (outs FPR:$dr), (ins FPR:$r, FPR:$s, BR:$t),
+  def MOVF_S   : RRR_Inst<0x00, 0x0B, 0x0C, (outs FPR:$dr), (ins FPR:$r, FPR:$s, BR1:$t),
                         "movf.s\t$r, $s, $t",
-                        [(set FPR:$dr, (int_xtensa_xt_movf_s FPR:$r, FPR:$s, BR:$t))]>,
+                        [(set FPR:$dr, (int_xtensa_xt_movf_s FPR:$r, FPR:$s, BR1:$t))]>,
                         Requires<[HasBoolean, HasSingleFloat]>;
 }
 

@@ -340,6 +340,11 @@ let SubRegIndices = [bsub0, bsub1, bsub2, bsub3] in {
 
 }
 
+def BR1 : RegisterClass<"Xtensa", [v1i1], 8, (add B0, B1,
+B2, B3, B4, B5, B6, B7, B8, B9, B10, B11, B12, B13, B14, B15)> {
+  let Size = 8;
+}
+
 def BR2 : RegisterClass<"Xtensa", [v2i1], 8, (add B0_B1, B2_B3, B4_B5,
                                                   B6_B7, B8_B9, B10_B11, 
                                                   B12_B13, B14_B15)> {
