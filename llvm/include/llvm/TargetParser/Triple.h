@@ -195,7 +195,8 @@ public:
     SUSE,
     OpenEmbedded,
     Swift,
-    LastVendorType = Swift
+    Espressif,
+    LastVendorType = Espressif
   };
   enum OSType {
     UnknownOS,
@@ -1058,6 +1059,9 @@ public:
   bool isBPF() const {
     return getArch() == Triple::bpfel || getArch() == Triple::bpfeb;
   }
+
+  /// Tests whether the target is Xtensa.
+  bool isXtensa() const { return getArch() == Triple::xtensa; }
 
   /// Tests if the target forces 64-bit time_t on a 32-bit architecture.
   bool isTime64ABI() const {
