@@ -13,13 +13,14 @@
 #include "XtensaFrameLowering.h"
 #include "XtensaInstrInfo.h"
 #include "XtensaMachineFunctionInfo.h"
+#include "XtensaRegisterInfo.h"
 #include "XtensaSubtarget.h"
+#include "llvm/CodeGen/MachineFrameInfo.h"
+#include "llvm/CodeGen/MachineFunction.h"
 #include "llvm/CodeGen/MachineInstrBuilder.h"
-#include "llvm/CodeGen/MachineModuleInfo.h"
 #include "llvm/CodeGen/MachineRegisterInfo.h"
 #include "llvm/CodeGen/RegisterScavenging.h"
-#include "llvm/IR/Function.h"
-
+#include "llvm/Target/TargetOptions.h"
 #define STACK_SIZE_THRESHOLD 100
 
 using namespace llvm;
@@ -29,7 +30,7 @@ XtensaFrameLowering::XtensaFrameLowering(const XtensaSubtarget &STI)
                           Align(4)),
       TII(*STI.getInstrInfo()), TRI(STI.getRegisterInfo()) {}
 
-bool XtensaFrameLowering::hasFPImpl(const MachineFunction &MF) const {
+bool XtensaFrameLowering::hasFP(const MachineFunction &MF) const {
   const MachineFrameInfo &MFI = MF.getFrameInfo();
   return MF.getTarget().Options.DisableFramePointerElim(MF) ||
          MFI.hasVarSizedObjects();
@@ -417,7 +418,7 @@ void XtensaFrameLowering::processFunctionBeforeFrameFinalized(
     ScavSlotsNum = 1;
 
   // Far branches over 18-bit offset require a spill slot for scratch register.
-  bool IsLargeFunction = !isInt<18>(MF.estimateFunctionSizeInBytes());
+  bool IsLargeFunction = !isInt<18>(MaxSPOffset);
   if (IsLargeFunction)
     ScavSlotsNum = std::max(ScavSlotsNum, 1u);
 

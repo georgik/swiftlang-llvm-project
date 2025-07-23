@@ -2186,7 +2186,6 @@ include "XtensaDSPInstrInfo.td"
 //===----------------------------------------------------------------------===//
 // HiFi3 Instructions
 //===----------------------------------------------------------------------===//
-// Temporarily commented out to test main instruction set
-// include "XtensaHIFIInstrFormats.td"
-// include "XtensaHIFIInstrInfo.td"
-// include "XtensaHIFIInstrPatterns.td"
+include "XtensaHIFIInstrFormats.td"
+include "XtensaHIFIInstrInfo.td"
+include "XtensaHIFIInstrPatterns.td"

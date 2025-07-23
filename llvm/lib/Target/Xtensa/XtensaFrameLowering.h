@@ -50,7 +50,7 @@ public:
                                            RegScavenger *RS) const override;
 
 protected:
-  bool hasFPImpl(const MachineFunction &MF) const override;
+  bool hasFP(const MachineFunction &MF) const override;
 };
 
 } // namespace llvm

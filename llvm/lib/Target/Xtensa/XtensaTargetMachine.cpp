@@ -67,10 +67,10 @@ XtensaTargetMachine::XtensaTargetMachine(const Target &T, const Triple &TT,
                                          std::optional<CodeModel::Model> CM,
                                          CodeGenOptLevel OL, bool JIT,
                                          bool IsLittle)
-    : CodeGenTargetMachineImpl(T, computeDataLayout(TT, CPU, Options, IsLittle),
-                               TT, CPU, FS, Options,
-                               getEffectiveRelocModel(JIT, RM),
-                               getEffectiveCodeModel(CM, CodeModel::Small), OL),
+    : LLVMTargetMachine(T, computeDataLayout(TT, CPU, Options, IsLittle),
+                        TT, CPU, FS, Options,
+                        getEffectiveRelocModel(JIT, RM),
+                        getEffectiveCodeModel(CM, CodeModel::Small), OL),
       TLOF(std::make_unique<TargetLoweringObjectFileELF>()) {
   initAsmInfo();
 }
@@ -110,8 +110,7 @@ XtensaTargetMachine::getTargetTransformInfo(const Function &F) const {
 MachineFunctionInfo *XtensaTargetMachine::createMachineFunctionInfo(
     BumpPtrAllocator &Allocator, const Function &F,
     const TargetSubtargetInfo *STI) const {
-  return XtensaMachineFunctionInfo::create<XtensaMachineFunctionInfo>(Allocator,
-                                                                      F, STI);
+  return new (Allocator) XtensaMachineFunctionInfo(F, STI);
 }
 
 namespace {

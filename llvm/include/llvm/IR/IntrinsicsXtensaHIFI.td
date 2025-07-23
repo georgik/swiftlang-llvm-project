@@ -26,7 +26,7 @@ def int_xtensa_ae_abs64: ClangBuiltin<"__builtin_xtensa_ae_abs64">,
   Intrinsic<[llvm_v1i64_ty], [llvm_v1i64_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_abs64s: ClangBuiltin<"__builtin_xtensa_ae_abs64s">,
-  Intrinsic<[llvm_i64_ty], [llvm_i64_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i64_ty], [llvm_v1i64_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_add16: ClangBuiltin<"__builtin_xtensa_ae_add16">,
   Intrinsic<[llvm_v4i16_ty], [llvm_v4i16_ty, llvm_v4i16_ty], [IntrNoMem]>;
@@ -125,7 +125,7 @@ def int_xtensa_ae_eq32:
   Intrinsic<[llvm_v2i1_ty], [llvm_v2i32_ty, llvm_v2i32_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_eq64: 
-  Intrinsic<[llvm_i1_ty], [llvm_v1i64_ty, llvm_v1i64_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i1_ty], [llvm_v1i64_ty, llvm_v1i64_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_l16_i: ClangBuiltin<"__builtin_xtensa_ae_l16_i">,
   Intrinsic<[llvm_v4i16_ty], [llvm_ptr_ty, llvm_i32_ty], [ImmArg<ArgIndex<1>>]>;
@@ -410,7 +410,7 @@ def int_xtensa_ae_le32:
   Intrinsic<[llvm_v2i1_ty], [llvm_v2i32_ty, llvm_v2i32_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_le64: 
-Intrinsic<[llvm_i1_ty], [llvm_v1i64_ty, llvm_v1i64_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i1_ty], [llvm_v1i64_ty, llvm_v1i64_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_lt16: 
   Intrinsic<[llvm_v4i1_ty], [llvm_v4i16_ty, llvm_v4i16_ty], [IntrNoMem]>;
@@ -488,7 +488,7 @@ def int_xtensa_ae_movf32x2:
   Intrinsic<[llvm_v2i32_ty], [llvm_v2i32_ty, llvm_v2i32_ty, llvm_v2i1_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_movf64: 
-Intrinsic<[llvm_v1i64_ty], [llvm_v1i64_ty, llvm_v1i64_ty, llvm_i1_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i64_ty], [llvm_v1i64_ty, llvm_v1i64_ty, llvm_v1i1_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_movi: ClangBuiltin<"__builtin_xtensa_ae_movi">,
   Intrinsic<[llvm_v2i32_ty], [llvm_i32_ty], [ImmArg<ArgIndex<0>>, IntrNoMem]>;
@@ -500,7 +500,7 @@ def int_xtensa_ae_movt32x2:
   Intrinsic<[llvm_v2i32_ty], [llvm_v2i32_ty, llvm_v2i32_ty, llvm_v2i1_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_movt64: 
-Intrinsic<[llvm_v1i64_ty], [llvm_v1i64_ty, llvm_v1i64_ty, llvm_i1_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i64_ty], [llvm_v1i64_ty, llvm_v1i64_ty, llvm_v1i1_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_mul16x4: 
   Intrinsic<[llvm_v2i32_ty, llvm_v2i32_ty], [llvm_v4i16_ty, llvm_v4i16_ty], [IntrNoMem]>;
@@ -2492,19 +2492,19 @@ def int_xtensa_ae_vldl16c_ip:
   Intrinsic<[llvm_ptr_ty], [llvm_ptr_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_vldl16t: 
-Intrinsic<[llvm_i1_ty, llvm_i32_ty], [llvm_ptr_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i1_ty, llvm_i32_ty], [llvm_ptr_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_vldl32t: 
-Intrinsic<[llvm_i1_ty, llvm_i32_ty], [llvm_ptr_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i1_ty, llvm_i32_ty], [llvm_ptr_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_vldsht: ClangBuiltin<"__builtin_xtensa_ae_vldsht">,
   Intrinsic<[], [llvm_i32_ty], []>;
 
 def int_xtensa_ae_vlel16t: 
-Intrinsic<[llvm_i1_ty, llvm_i32_ty], [llvm_i32_ty, llvm_ptr_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i1_ty, llvm_i32_ty], [llvm_i32_ty, llvm_ptr_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_vlel32t: 
-Intrinsic<[llvm_i1_ty, llvm_i32_ty], [llvm_i32_ty, llvm_ptr_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i1_ty, llvm_i32_ty], [llvm_i32_ty, llvm_ptr_ty], [IntrNoMem]>;
 
 def int_xtensa_ae_vles16c: 
   Intrinsic<[llvm_ptr_ty], [llvm_ptr_ty], [IntrNoMem]>;
