@@ -15,6 +15,9 @@
 #ifndef LLVM_IR_INTRINSICS_H
 #define LLVM_IR_INTRINSICS_H
 
+// Enable global intrinsics to include all target-specific intrinsics
+#define LLVM_GLOBAL_INTRINSICS_INCLUDE_ALL_TARGETS
+
 #include "llvm/ADT/ArrayRef.h"
 #include "llvm/Support/TypeSize.h"
 #include <optional>

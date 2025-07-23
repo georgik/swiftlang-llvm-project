@@ -136,6 +136,9 @@ void IntrinsicEmitter::EmitEnumInfo(const CodeGenIntrinsicTable &Ints,
     std::string UpperPrefix = StringRef(IntrinsicPrefix).upper();
     OS << "#ifndef LLVM_IR_INTRINSIC_" << UpperPrefix << "_ENUMS_H\n";
     OS << "#define LLVM_IR_INTRINSIC_" << UpperPrefix << "_ENUMS_H\n\n";
+    OS << "// Note: Target-specific intrinsics are now included in the global enum.\n";
+    OS << "// This header is kept for compatibility but may be deprecated.\n";
+    OS << "#ifndef LLVM_GLOBAL_INTRINSICS_INCLUDE_ALL_TARGETS\n";
     OS << "namespace llvm {\n";
     OS << "namespace Intrinsic {\n";
     OS << "enum " << UpperPrefix << "Intrinsics : unsigned {\n";
@@ -181,6 +184,7 @@ void IntrinsicEmitter::EmitEnumInfo(const CodeGenIntrinsicTable &Ints,
     OS << "}; // enum\n";
     OS << "} // namespace Intrinsic\n";
     OS << "} // namespace llvm\n\n";
+    OS << "#endif // LLVM_GLOBAL_INTRINSICS_INCLUDE_ALL_TARGETS\n";
     OS << "#endif\n";
   }
 }
