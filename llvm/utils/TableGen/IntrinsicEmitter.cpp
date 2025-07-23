@@ -142,18 +142,35 @@ void IntrinsicEmitter::EmitEnumInfo(const CodeGenIntrinsicTable &Ints,
   }
 
   OS << "// Enum values for intrinsics\n";
-  for (unsigned i = Set->Offset, e = Set->Offset + Set->Count; i != e; ++i) {
-    OS << "    " << Ints[i].EnumName;
+  // For global enum (empty IntrinsicPrefix), include ALL intrinsics from all targets
+  if (IntrinsicPrefix.empty()) {
+    for (unsigned i = 0, e = Ints.size(); i != e; ++i) {
+      OS << "    " << Ints[i].EnumName;
 
-    // Assign a value to the first intrinsic in this target set so that all
-    // intrinsic ids are distinct.
-    if (i == Set->Offset)
-      OS << " = " << (Set->Offset + 1);
+      // Assign a value to the first intrinsic so that all intrinsic ids are distinct.
+      if (i == 0)
+        OS << " = " << (i + 1);
 
-    OS << ", ";
-    if (Ints[i].EnumName.size() < 40)
-      OS.indent(40 - Ints[i].EnumName.size());
-    OS << " // " << Ints[i].Name << "\n";
+      OS << ", ";
+      if (Ints[i].EnumName.size() < 40)
+        OS.indent(40 - Ints[i].EnumName.size());
+      OS << " // " << Ints[i].Name << "\n";
+    }
+  } else {
+    // For target-specific enums, only include intrinsics from that target
+    for (unsigned i = Set->Offset, e = Set->Offset + Set->Count; i != e; ++i) {
+      OS << "    " << Ints[i].EnumName;
+
+      // Assign a value to the first intrinsic in this target set so that all
+      // intrinsic ids are distinct.
+      if (i == Set->Offset)
+        OS << " = " << (Set->Offset + 1);
+
+      OS << ", ";
+      if (Ints[i].EnumName.size() < 40)
+        OS.indent(40 - Ints[i].EnumName.size());
+      OS << " // " << Ints[i].Name << "\n";
+    }
   }
 
   // Emit num_intrinsics into the target neutral enum.
