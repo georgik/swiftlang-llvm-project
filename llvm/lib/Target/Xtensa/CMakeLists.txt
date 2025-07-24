@@ -26,6 +26,7 @@ add_llvm_target(XtensaCodeGen
   XtensaSubtarget.cpp
   XtensaTargetMachine.cpp
   XtensaTargetObjectFile.cpp
+  XtensaTargetTransformInfo.cpp
   XtensaUtils.cpp
 
   LINK_COMPONENTS

@@ -38,11 +38,14 @@ class XtensaMachineFunctionInfo : public MachineFunctionInfo {
   /// BranchRelaxationScratchFrameIndex - Frame index for branch relaxation scratch register
   int BranchRelaxationScratchFrameIndex = -1;
 
+  /// LabelUID - Counter for creating unique labels
+  unsigned LabelUID = 0;
+
 public:
   XtensaMachineFunctionInfo(const Function &F, const TargetSubtargetInfo *STI)
       : VarArgsFirstGPR(0), VarArgsInRegsFrameIndex(0), 
         VarArgsOnStackFrameIndex(0), SaveFrameRegister(false),
-        BranchRelaxationScratchFrameIndex(-1) {}
+        BranchRelaxationScratchFrameIndex(-1), LabelUID(0) {}
 
   MachineFunctionInfo *
   clone(BumpPtrAllocator &Allocator, MachineFunction &DestMF,
@@ -67,6 +70,8 @@ public:
   void setBranchRelaxationScratchFrameIndex(int FI) { 
     BranchRelaxationScratchFrameIndex = FI; 
   }
+
+  unsigned createLabelUID() { return LabelUID++; }
 };
 
 } // namespace llvm

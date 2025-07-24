@@ -20,6 +20,7 @@
 #include "llvm/CodeGen/MachineInstrBuilder.h"
 #include "llvm/CodeGen/MachineRegisterInfo.h"
 #include "llvm/CodeGen/RegisterScavenging.h"
+#include "llvm/MC/MCContext.h"
 #include "llvm/Target/TargetOptions.h"
 #define STACK_SIZE_THRESHOLD 100
 

@@ -18,6 +18,7 @@
 #include "XtensaSubtarget.h"
 #include "XtensaTargetMachine.h"
 #include "llvm/CodeGen/CallingConvLower.h"
+#include "llvm/CodeGen/MachineFrameInfo.h"
 #include "llvm/CodeGen/MachineInstrBuilder.h"
 #include "llvm/CodeGen/MachineJumpTableInfo.h"
 #include "llvm/CodeGen/MachineRegisterInfo.h"
@@ -768,7 +769,7 @@ static SDValue PerformHWLoopCombine(SDNode *N, SelectionDAG &DAG,
   if (Int) {
     assert((N->hasOneUse() && N->use_begin()->getUser()->getOpcode() == ISD::BR) &&
            "expected single br user");
-    SDNode *Br = (*N->use_begin()).getUser();
+    SDNode *Br = *N->use_begin();
     SDValue OtherTarget = Br->getOperand(1);
 
     if (Negate)
@@ -1591,7 +1592,7 @@ SDValue XtensaTargetLowering::LowerSETCC(SDValue Op, SelectionDAG &DAG) const {
   bool Val = false;
   for (SDNode::use_iterator UI = OpNode.use_begin(); UI != OpNode.use_end();
        ++UI) {
-    SDNode *User = UI->getUser();
+    SDNode *User = *UI;
     unsigned OpCode = User->getOpcode();
     if (OpCode == ISD::BRCOND) {
       Val = true;
@@ -1649,7 +1650,7 @@ SDValue XtensaTargetLowering::LowerImmediate(SDValue Op,
       return Op;
     // Check if use node maybe lowered to the ADDMI instruction
     SDNode &OpNode = *Op.getNode();
-    if ((OpNode.hasOneUse() && OpNode.user_begin()->getOpcode() == ISD::ADD) &&
+    if ((OpNode.hasOneUse() && (*OpNode.use_begin())->getOpcode() == ISD::ADD) &&
         isShiftedInt<8, 8>(Value))
       return Op;
     Type *Ty = Type::getInt32Ty(*DAG.getContext());
@@ -1808,7 +1809,7 @@ SDValue XtensaTargetLowering::LowerConstantPool(SDValue Op,
         *M, T, /*isConstant=*/true, GlobalVariable::InternalLinkage, C,
         Twine(DAG.getDataLayout().getPrivateGlobalPrefix()) + "CP" +
             Twine(DAG.getMachineFunction().getFunctionNumber()) + "_" +
-            Twine(AFI->createLabelUId()));
+            Twine(AFI->createLabelUID()));
     Result = DAG.getTargetConstantPool(GV, PtrVT, Align(4));
   } else {
     if (CP->isMachineConstantPoolEntry())
@@ -1872,7 +1873,7 @@ SDValue XtensaTargetLowering::LowerDYNAMIC_STACKALLOC(SDValue Op,
   SDValue SizeTmp =
       DAG.getNode(ISD::ADD, DL, VT, Size, DAG.getConstant(31, DL, MVT::i32));
   SDValue SizeRoundUp = DAG.getNode(ISD::AND, DL, VT, SizeTmp,
-                                    DAG.getSignedConstant(~31, DL, MVT::i32));
+                                    DAG.getConstant(~31, DL, MVT::i32));
 
   unsigned SPReg = Xtensa::SP;
   SDValue SP = DAG.getCopyFromReg(Chain, DL, SPReg, VT);
@@ -2006,7 +2007,7 @@ SDValue XtensaTargetLowering::LowerVAARG(SDValue Op, SelectionDAG &DAG) const {
                             DAG.getConstant(ArgAlignInBytes - 1, DL, MVT::i32));
     OrigIndex =
         DAG.getNode(ISD::AND, DL, PtrVT, OrigIndex,
-                    DAG.getSignedConstant(-ArgAlignInBytes, DL, MVT::i32));
+                    DAG.getConstant(-ArgAlignInBytes, DL, MVT::i32));
   }
 
   VAIndex = DAG.getNode(ISD::ADD, DL, PtrVT, OrigIndex,
@@ -2055,7 +2056,7 @@ SDValue XtensaTargetLowering::LowerShiftLeftParts(SDValue Op,
   //   Lo = 0
   //   Hi = Lo << (Shamt - register size)
 
-  SDValue MinusRegisterSize = DAG.getSignedConstant(-32, DL, VT);
+  SDValue MinusRegisterSize = DAG.getConstant(-32, DL, VT);
   SDValue ShamtMinusRegisterSize =
       DAG.getNode(ISD::ADD, DL, VT, Shamt, MinusRegisterSize);
 
@@ -2096,7 +2097,7 @@ SDValue XtensaTargetLowering::LowerShiftRightParts(SDValue Op,
   //     Hi = 0;
 
   unsigned ShiftRightOp = IsSRA ? ISD::SRA : ISD::SRL;
-  SDValue MinusRegisterSize = DAG.getSignedConstant(-32, DL, VT);
+  SDValue MinusRegisterSize = DAG.getConstant(-32, DL, VT);
   SDValue RegisterSizeMinus1 = DAG.getConstant(32 - 1, DL, VT);
   SDValue ShamtMinusRegisterSize =
       DAG.getNode(ISD::ADD, DL, VT, Shamt, MinusRegisterSize);
