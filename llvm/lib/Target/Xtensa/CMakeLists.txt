@@ -16,13 +16,20 @@ add_public_tablegen_target(XtensaCommonTableGen)
 
 add_llvm_target(XtensaCodeGen
   XtensaAsmPrinter.cpp
+  XtensaBRegFixupPass.cpp
+  XtensaConstantIsland.cpp
   XtensaConstantPoolValue.cpp
+  XtensaFixupHWLoops.cpp
   XtensaFrameLowering.cpp
+  XtensaHardwareLoops.cpp
   XtensaInstrInfo.cpp
   XtensaISelDAGToDAG.cpp
   XtensaISelLowering.cpp
   XtensaMachineFunctionInfo.cpp
+  XtensaPSRAMCacheFixPass.cpp
   XtensaRegisterInfo.cpp
+  XtensaS3ISelLowering.cpp
+  XtensaSizeReductionPass.cpp
   XtensaSubtarget.cpp
   XtensaTargetMachine.cpp
   XtensaTargetObjectFile.cpp
