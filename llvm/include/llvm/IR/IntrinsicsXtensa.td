@@ -259,25 +259,25 @@ def int_xtensa_xt_movf_s: ClangBuiltin<"__builtin_xtensa_xt_movf_s">,
   Intrinsic<[llvm_float_ty], [llvm_float_ty, llvm_float_ty, llvm_v1i1_ty], [IntrNoMem]>;
 
 def int_xtensa_xt_oeq_s: ClangBuiltin<"__builtin_xtensa_xt_oeq_s">,
-  Intrinsic<[llvm_i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
 
 def int_xtensa_xt_ole_s: ClangBuiltin<"__builtin_xtensa_xt_ole_s">,
-  Intrinsic<[llvm_i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
 
 def int_xtensa_xt_olt_s: ClangBuiltin<"__builtin_xtensa_xt_olt_s">,
-  Intrinsic<[llvm_i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
 
 def int_xtensa_xt_ueq_s: ClangBuiltin<"__builtin_xtensa_xt_ueq_s">,
-  Intrinsic<[llvm_i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
 
 def int_xtensa_xt_ule_s: ClangBuiltin<"__builtin_xtensa_xt_ule_s">,
-  Intrinsic<[llvm_i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
 
 def int_xtensa_xt_ult_s: ClangBuiltin<"__builtin_xtensa_xt_ult_s">,
-  Intrinsic<[llvm_i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
 
 def int_xtensa_xt_un_s: ClangBuiltin<"__builtin_xtensa_xt_un_s">,
-  Intrinsic<[llvm_i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
+  Intrinsic<[llvm_v1i1_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;
 
 def int_xtensa_xt_add_s: ClangBuiltin<"__builtin_xtensa_xt_add_s">,
   Intrinsic<[llvm_float_ty], [llvm_float_ty, llvm_float_ty], [IntrNoMem]>;

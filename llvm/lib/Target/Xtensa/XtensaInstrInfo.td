@@ -1108,9 +1108,9 @@ def : Pat<(Xtensa_br_f BR:$b, bb:$target), (BF BR:$b, bb:$target)>;
 
 let Predicates = [HasBoolean] in {
 
-  def OR_BR_PAT: BIN_PAT<or,ORB,i1>;
-  def XOR_BR_PAT: BIN_PAT<xor,XORB,i1>;
-  def AND_BR_PAT: BIN_PAT<and,ANDB,i1>;
+  def OR_BR_PAT: BIN_PAT<or,ORB,v1i1>;
+  def XOR_BR_PAT: BIN_PAT<xor,XORB,v1i1>;
+  def AND_BR_PAT: BIN_PAT<and,ANDB,v1i1>;
 
   // vselect C T F = C * T + ~C * F
   // Temporarily commented out due to type issues
@@ -1160,8 +1160,8 @@ let Predicates = [HasBoolean] in {
   def SLLI_BR_P: Pseudo<(outs AR:$r), (ins AR:$s, BR:$b),
                         "!slli_br $r, $s, $b", []>;
 
-  def : Pat<(i1 (build_vector AR:$a)), (MOVBA_P AR:$a)>;
-  def : Pat<(i1 (scalar_to_vector AR:$a)), (MOVBA_P AR:$a)>;
+  def : Pat<(v1i1 (build_vector AR:$a)), (MOVBA_P AR:$a)>;
+  def : Pat<(v1i1 (scalar_to_vector AR:$a)), (MOVBA_P AR:$a)>;
 
   def : Pat<(v2i1 (build_vector AR:$a, AR:$b)),
              (MOVBA2_P (OR AR:$a, (SLLI AR:$b, (i32 1))))>;
@@ -1169,9 +1169,9 @@ let Predicates = [HasBoolean] in {
   def : Pat<(v2i1 (Xtensa_trunc AR:$s)), (MOVBA2_P AR:$s)>;
   def : Pat<(v4i1 (Xtensa_trunc AR:$s)), (MOVBA4_P AR:$s)>;
 
-  def : Pat<(i32 (vector_extract (i1 BR:$b), (i32 0))),
+  def : Pat<(i32 (vector_extract (v1i1 BR:$b), (i32 0))),
             (EXTUI_BR_P (RSR BREG), BR:$b)>;
-  def : Pat<(i1 (load addr_ish1:$addr)), (MOVBA_P (L8UI mem8:$addr))>;
+  def : Pat<(v1i1 (load addr_ish1:$addr)), (MOVBA_P (L8UI mem8:$addr))>;
   def : Pat<(v2i1 (load addr_ish1:$addr)), (MOVBA2_P (L8UI mem8:$addr))>;
   def : Pat<(v4i1 (load addr_ish1:$addr)), (MOVBA4_P (L8UI mem8:$addr))>;
 
@@ -1301,13 +1301,13 @@ def ULE_S :  FCompare<0x07, 0x0b, "ule.s", Xtensa_cmpule, 0>;
 def UN_S  :  FCompare<0x01, 0x0b, "un.s",  Xtensa_cmpuo, 1>;
 
 let Predicates = [HasSingleFloat] in {
-  def : Arith_Pat<i1, FPR, int_xtensa_xt_ole_s, OLE_S>;
-  def : Arith_Pat<i1, FPR, int_xtensa_xt_ule_s, ULE_S>;
-  def : Arith_Pat<i1, FPR, int_xtensa_xt_olt_s, OLT_S>;
-  def : Arith_Pat<i1, FPR, int_xtensa_xt_ult_s, ULT_S>;
-  def : Arith_Pat<i1, FPR, int_xtensa_xt_oeq_s, OEQ_S>;
-  def : Arith_Pat<i1, FPR, int_xtensa_xt_ueq_s, UEQ_S>;
-  def : Arith_Pat<i1, FPR, int_xtensa_xt_un_s, UN_S>;
+  def : Arith_Pat<v1i1, FPR, int_xtensa_xt_ole_s, OLE_S>;
+  def : Arith_Pat<v1i1, FPR, int_xtensa_xt_ule_s, ULE_S>;
+  def : Arith_Pat<v1i1, FPR, int_xtensa_xt_olt_s, OLT_S>;
+  def : Arith_Pat<v1i1, FPR, int_xtensa_xt_ult_s, ULT_S>;
+  def : Arith_Pat<v1i1, FPR, int_xtensa_xt_oeq_s, OEQ_S>;
+  def : Arith_Pat<v1i1, FPR, int_xtensa_xt_ueq_s, UEQ_S>;
+  def : Arith_Pat<v1i1, FPR, int_xtensa_xt_un_s, UN_S>;
 }
 
 def ABS_S : RRR_Inst<0x00, 0x0A, 0x0F, (outs FPR:$r), (ins FPR:$s),
