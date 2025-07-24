@@ -197,6 +197,17 @@ static DecodeStatus DecodeBRRegisterClass(MCInst &Inst, uint64_t RegNo,
   return MCDisassembler::Success;
 }
 
+static DecodeStatus DecodeBR1RegisterClass(MCInst &Inst, uint64_t RegNo,
+                                           uint64_t Address,
+                                           const void *Decoder) {
+  if (RegNo >= std::size(BRDecoderTable))
+    return MCDisassembler::Fail;
+
+  unsigned Reg = BRDecoderTable[RegNo];
+  Inst.addOperand(MCOperand::createReg(Reg));
+  return MCDisassembler::Success;
+}
+
 static const unsigned MRDecoderTable[] = {Xtensa::M0, Xtensa::M1, Xtensa::M2,
                                           Xtensa::M3};
 
