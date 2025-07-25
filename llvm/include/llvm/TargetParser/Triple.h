@@ -300,7 +300,9 @@ public:
     GNUEABIT64,
     GNUEABIHFT64,
 
-    LastEnvironmentType = GNUEABIHFT64
+    ESPIDF,
+
+    LastEnvironmentType = ESPIDF
   };
   enum ObjectFormatType {
     UnknownObjectFormat,

@@ -359,6 +359,7 @@ StringRef Triple::getEnvironmentTypeName(EnvironmentType Kind) {
   case OpenHOS: return "ohos";
   case PAuthTest:
     return "pauthtest";
+  case ESPIDF: return "espidf";
   }
 
   llvm_unreachable("Invalid EnvironmentType!");
@@ -644,6 +645,9 @@ static Triple::VendorType parseVendor(StringRef VendorName) {
     .Case("swift", Triple::Swift)
     .Case("oe", Triple::OpenEmbedded)
     .Case("espressif", Triple::Espressif)
+    .Case("esp32", Triple::Espressif)
+    .Case("esp32s2", Triple::Espressif)
+    .Case("esp32s3", Triple::Espressif)
     .Default(Triple::UnknownVendor);
 }
 
@@ -742,6 +746,7 @@ static Triple::EnvironmentType parseEnvironment(StringRef EnvironmentName) {
       .StartsWith("opencl", Triple::OpenCL)
       .StartsWith("ohos", Triple::OpenHOS)
       .StartsWith("pauthtest", Triple::PAuthTest)
+      .StartsWith("espidf", Triple::ESPIDF)
       .Default(Triple::UnknownEnvironment);
 }
 
