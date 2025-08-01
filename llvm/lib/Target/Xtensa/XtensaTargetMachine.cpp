@@ -71,7 +71,7 @@ XtensaTargetMachine::XtensaTargetMachine(const Target &T, const Triple &TT,
                         TT, CPU, FS, Options,
                         getEffectiveRelocModel(JIT, RM),
                         getEffectiveCodeModel(CM, CodeModel::Small), OL),
-      TLOF(std::make_unique<TargetLoweringObjectFileELF>()) {
+      TLOF(createTLOF()) {
   initAsmInfo();
 }
 

@@ -9,6 +9,7 @@ add_llvm_component_library(LLVMXtensaDesc
   XtensaTargetStreamer.cpp
 
   LINK_COMPONENTS
+  CodeGen
   MC
   Support
   XtensaInfo

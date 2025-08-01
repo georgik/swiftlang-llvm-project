@@ -2,6 +2,7 @@ add_llvm_component_library(LLVMRISCVAsmParser
   RISCVAsmParser.cpp
 
   LINK_COMPONENTS
+  CodeGen
   MC
   MCParser
   RISCVDesc

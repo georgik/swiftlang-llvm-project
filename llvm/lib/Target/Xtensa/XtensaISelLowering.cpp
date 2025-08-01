@@ -767,9 +767,9 @@ static SDValue PerformHWLoopCombine(SDNode *N, SelectionDAG &DAG,
 
   SDValue Int = SearchLoopIntrinsic(Cond, CC, Imm, Negate);
   if (Int) {
-    assert((N->hasOneUse() && N->use_begin()->getUser()->getOpcode() == ISD::BR) &&
+    assert((N->hasOneUse() && N->use_begin().getUse().getUser()->getOpcode() == ISD::BR) &&
            "expected single br user");
-    SDNode *Br = *N->use_begin();
+    SDNode *Br = N->use_begin().getUse().getUser();
     SDValue OtherTarget = Br->getOperand(1);
 
     if (Negate)
